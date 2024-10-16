@@ -1,16 +1,19 @@
 # WealthWise - Site de Análise de Investimentos
 
-# [https://github.com/fcl2002/wealthwise](GitHub)
+## [GitHub](https://github.com/fcl2002/wealthwise)
 
-# Language: Python
+## Linguagem: Python
 
 ## Descrição
+
 Uma aplicação de apoio ao investidor iniciante que oferece análises, simulações e monitoramente de investimentos em tempo real.
 
 ## Definições
+
 - **_ticker_** - termo utilizado para identificar ações, fundos ou outros instrumentos financeiros em uma bolsa de valores.
 
 ## Instalação
+
     1. Clone o repositório:
         $ git clone https://github.com/fcl2002/wealthwise.git
     2. Instale as dependências:
@@ -20,6 +23,7 @@ Uma aplicação de apoio ao investidor iniciante que oferece análises, simulaç
         - API_KEY=<sua API key>
 
 ## Como Usar
+
     1. Para rodar o backend:
         $ python manage.py runserver (Django)
     2. Acesse a aplicação:
@@ -41,8 +45,6 @@ Uma aplicação de apoio ao investidor iniciante que oferece análises, simulaç
 - [ ] O sistema deve ser capaz de buscar informações sobre os ativos selecionados, como balanços financeiros, relatórios de resultados trimestrais, e notícias relacionadas aos ativos.
 - [ ] O usuário deve poder definir alertas personalizados para variações de preço ou eventos específicos dos ativos monitorados, podendo receber notificações via e-mail, SMS ou push notifications.
 
-
 ## Contribuição
-
 
 ## Licença
