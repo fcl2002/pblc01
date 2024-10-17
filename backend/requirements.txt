@@ -1,2 +1,4 @@
-fastapi
-uvicorn
+fastapi==0.115.2
+uvicorn==0.32.0
+sentry_sdk==2.16.0
+sqlalchemy==2.0.36

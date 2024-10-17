@@ -1,11 +1,7 @@
-from pydantic import BaseModel
-from typing import List
-from app.schemas.ativo import Ativo
+from ativo import Ativo
+from typing import List, Optional
 
-class VariavelBase(AtivoBase):
-    ticker: str
-    etf: bool
-
-class Variavel(VariavelBase):
-    class Config:
-        orm_mode = True
+class Variavel(Ativo):
+    super().__init__()
+    ticker: Optional[str] = None
+    etf: Optional[bool] = None

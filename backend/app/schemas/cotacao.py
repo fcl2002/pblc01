@@ -1,15 +1,9 @@
-from datetime import datetime
+import ativo as Ativo
 from pydantic import BaseModel
-from typing import List
-from app.schemas.enum_risco import PerfilRiscoEnum
+from datetime import datetime
+from typing import Optional
 
-class CotacaoBase(BaseModel):
-    preco: float
-    date: datetime
-    
-class CotacaoCreate(CotacaoBase):
-    ativo: Ativo
-    
-class Cotacao(CotacaoBase):
-    class Config:
-        orm_mode = True
+class Cotacao(BaseModel):
+    preco: Optional[float] = None
+    date: Optional[datetime] = None
+    ativo: Optional[Ativo] = None

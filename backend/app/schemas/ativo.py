@@ -1,12 +1,12 @@
+from typing import List, Optional
 from pydantic import BaseModel
-from abc import ABC, abstractmethod
+import cotacao as Cotacao
+import carteira as Carteira
 
-class AtivoBase(BaseModel, ABC):
-    nome: str
-    valor_investido: float
-    numero_cotas: float
-    preco_atual: float
-
-class Ativo(AtivoBase):
-    class Config:
-        orm_mode = True
+class Ativo(BaseModel):
+    nome: Optional[str] = None
+    valor_investido: float = None
+    numero_cotas: float = None
+    preco_atual: float = None
+    cotacoes: List[Cotacao] = []
+    carteira: Carteira = None

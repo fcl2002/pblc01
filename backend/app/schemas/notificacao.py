@@ -1,16 +1,11 @@
+import usuario as Usuario
+from typing import List, Optional
+from cotacao import Cotacao
+from enum_risco import EnumRisco
 from pydantic import BaseModel
-from typing import List
-from app.schemas.enum_risco import PerfilRiscoEnum
 
-class NotificacaoBase(BaseModel):
-    mensagem: str
-    tipo: str
-
-class NotificacaoCreate(NotificacaoBase):
-    usuario_id: int
-    cotacao: Cotacao
-
-class Notificacao(NotificacaoBase):
-    logado: bool
-    class Config:
-        orm_mode = True
+class Notificacao(BaseModel):
+    mensagem: Optional[str] = None
+    tipo: Optional[str] = None
+    cotacao: Optional[Cotacao] = None
+    usuario_id: Optional[Usuario] = None

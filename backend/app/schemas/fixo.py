@@ -1,13 +1,10 @@
-from pydantic import BaseModel
 from typing import List
-from app.schemas.ativo import Ativo
+from ativo import Ativo
+from pydantic import BaseModel
 
-class FixoBase(AtivoBase):
-    rentabilidade: float
-    periodo: int
-    isencao_IR: bool
-    valor_face: int
-    
-class Fixo(FixoBase):
-    class Config:
-        orm_mode = True
+class Fixo(Ativo):
+    super().__init__()
+    rentabilidade: float = None
+    periodo: int = None
+    isencao_IR: bool = None
+    valor_face: int = None

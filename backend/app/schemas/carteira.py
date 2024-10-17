@@ -1,15 +1,13 @@
+from typing import List, Optional
 from pydantic import BaseModel
-from typing import List
-from app.schemas.ativo import Ativo
+import ativo as Ativo
+import usuario as Usuario
 
-class CarteiraBase(BaseModel):
-    id: str
-    risco: float
-    
-class CarteiraoCreate(CarteiraBase):
+class Carteira(BaseModel):
+    id: int = None
+    risco: Optional[float] = None
     usuario: Usuario
-
-class Carteira(CarteiraBase):
     ativos: List[Ativo] = []
-    class Config:
-        orm_mode = True
+        
+    # for ativo in self.ativos:
+    #     self.risco += ativo.risco
