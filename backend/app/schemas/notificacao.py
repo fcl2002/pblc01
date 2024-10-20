@@ -1,11 +1,14 @@
-import usuario as Usuario
-from typing import List, Optional
-from cotacao import Cotacao
-from enum_risco import EnumRisco
+from uuid import UUID
+from typing import List
 from pydantic import BaseModel
+from .usuario import Usuario
+from .cotacao import Cotacao
 
 class Notificacao(BaseModel):
-    mensagem: Optional[str] = None
-    tipo: Optional[str] = None
-    cotacao: Optional[Cotacao] = None
-    usuario_id: Optional[Usuario] = None
+    uuid: UUID
+    message: str
+    type: str
+    
+class NotificacaoDetalhes(Notificacao):
+    cotacao: Cotacao
+    usuario_id: Usuario

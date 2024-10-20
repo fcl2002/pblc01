@@ -1,9 +1,13 @@
-import ativo as Ativo
-from pydantic import BaseModel
+from uuid import UUID
+from typing import List
 from datetime import datetime
-from typing import Optional
+from pydantic import BaseModel
+from .ativo import Ativo
+
 
 class Cotacao(BaseModel):
-    preco: Optional[float] = None
-    date: Optional[datetime] = None
-    ativo: Optional[Ativo] = None
+    price: float
+    date: datetime
+    
+class CotacaoDetalhes(Cotacao):
+    ativo: Ativo

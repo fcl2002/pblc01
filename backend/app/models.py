@@ -10,7 +10,7 @@ class UserBase(SQLModel):
     is_active: bool = True                                                 # logado
     is_super: bool = False                                                 # usuário super
     full_name: str | None = Field(default=None, max_length=255)            # nome completo
-    risk_profile: EnumRisco | None = Field(default=None, max_length=255)  # perfil de risco
+    risk_profile: EnumRisco | None = Field(default=None, max_length=255)   # perfil de risco
     
 # properties to receive via API on creation
 class UserCreate(UserBase):

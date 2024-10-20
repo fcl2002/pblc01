@@ -1,13 +1,13 @@
-from typing import List, Optional
+from uuid import UUID
+from typing import List
 from pydantic import BaseModel
-import ativo as Ativo
-import usuario as Usuario
+from .ativo import Ativo
+from .usuario import Usuario
 
 class Carteira(BaseModel):
-    id: int = None
-    risco: Optional[float] = None
+    uuid: UUID
+    risk: float
+    
+class CarteiraDetalhes(Carteira):
     usuario: Usuario
     ativos: List[Ativo] = []
-        
-    # for ativo in self.ativos:
-    #     self.risco += ativo.risco
