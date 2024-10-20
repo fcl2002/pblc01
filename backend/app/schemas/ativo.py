@@ -12,8 +12,6 @@ class Ativo(BaseModel):
     class Config:
         orm_mode = True
 
-    
-
-class AtivoDetail(Ativo):
+class AtivoDetalhes(Ativo):
     cotacoes: List[Cotacao] = []
     carteira: Carteira
