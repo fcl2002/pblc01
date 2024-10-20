@@ -1,12 +1,19 @@
-from typing import List, Optional
+from typing import List
 from pydantic import BaseModel
-import cotacao as Cotacao
-import carteira as Carteira
+from .cotacao import Cotacao
+from .carteira import Carteira
 
 class Ativo(BaseModel):
-    nome: Optional[str] = None
-    valor_investido: float = None
-    numero_cotas: float = None
-    preco_atual: float = None
+    nome: str
+    valor_investido: float
+    numero_cotas: float
+    preco_atual: float
+    
+    class Config:
+        orm_mode = True
+
+    
+
+class AtivoDetail(Ativo):
     cotacoes: List[Cotacao] = []
-    carteira: Carteira = None
+    carteira: Carteira
