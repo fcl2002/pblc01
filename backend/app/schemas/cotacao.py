@@ -9,5 +9,8 @@ class Cotacao(BaseModel):
     price: float
     date: datetime
     
+    class Config:
+        orm_mode = True
+    
 class CotacaoDetalhes(Cotacao):
     ativo: Ativo

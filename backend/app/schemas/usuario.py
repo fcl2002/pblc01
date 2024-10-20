@@ -11,7 +11,7 @@ class Usuario(BaseModel):
     password: str
     is_active = True
     is_super = False
-    risk_profile: Optional[str] = 'Conservador'
+    risk_profile: Optional[str] | None = 'Conservador'
     
     class Config:
         orm_mode = True

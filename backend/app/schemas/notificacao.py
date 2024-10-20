@@ -9,6 +9,9 @@ class Notificacao(BaseModel):
     message: str
     type: str
     
+    class Config:
+        orm_mode = True
+    
 class NotificacaoDetalhes(Notificacao):
     cotacao: Cotacao
     usuario_id: Usuario
