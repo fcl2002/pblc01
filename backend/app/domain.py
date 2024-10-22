@@ -15,8 +15,8 @@ class Usuario(SQLModel, table=True):
     logado : bool | None
     perfilRisco : str | None = Field(max_length=255)
 
-    carteiras : list['Carteira'] = Relationship(back_populates="usuario")
-    notificacoes : list['Notificacao'] = Relationship(back_populates="usuario")
+    carteiras : list['Carteira'] = Relationship(back_populates="usuario_carteira")
+    notificacoes : list['Notificacao'] = Relationship(back_populates="usuario_notificacao")
 
 
 class Notificacao(SQLModel, table=True):
@@ -25,8 +25,8 @@ class Notificacao(SQLModel, table=True):
     tipo : str | None = Field(max_length=255)
 
     cotacao : 'Cotacao' = Relationship(back_populates="notificacoes")
-    usuario : 'Usuario' = Relationship(back_populates="notificacoes")
-    usuario_email : str = Field(foreign_key="usuario.email")
+    usuario_notificacao : 'Usuario' = Relationship(back_populates="notificacoes")
+    usuario_email : str = Field(foreign_key="Usuario.email")
 
 
 class Cotacao(SQLModel, table=True):
@@ -43,30 +43,31 @@ class Carteira(SQLModel, table=True):
     risco : float | None
 
     ativos : list['Ativo'] = Relationship(back_populates="carteira")
-    usuario : 'Usuario' = Relationship(back_populates="carteiras")
-    email_usuario : str = Field(foreign_key="usuario.email")
+    usuario_carteira : 'Usuario' = Relationship(back_populates="carteiras")
+    email_usuario : str = Field(foreign_key="Usuario.email")
 
 
-class Ativo(SQLModel, table=True):
-    nome : str | None = Field(max_length=255, primary_key=True)
+class Ativo(SQLModel):
+    nome : str | None = Field(max_length=255)
     valorInvestido : float | None
     numeroCotas : float | None
     precoAtual : float | None
 
     carteira : 'Carteira' = Relationship(back_populates="ativos")
-    id_carteira : UUID = Field(foreign_key="carteira.id")
+    id_carteira : UUID = Field(foreign_key="Carteira.id")
     cotacoes : list['Cotacao'] = Relationship(back_populates="ativo")
 
 
 class Variavel(Ativo, table=True):
-    ticker : str | None = Field(max_length=255)
+    ticker : str | None = Field(max_length=255, primary_key=True)
     etf : bool | None
 
 class Fixo(Ativo, table=True):
-    rentabilidade = float | None
-    periodo = int | None
-    isencaoIR = bool | None
-    valorFace = int | None
+    id : UUID = Field(primary_key=True)
+    rentabilidade : float | None
+    periodo : int | None
+    isencaoIR : bool | None
+    valorFace : int | None
 
 
 
@@ -81,8 +82,8 @@ if __name__=="__main__":
     SQLModel.metadata.create_all(engine) 
     with Session(engine) as se:
         u = Usuario(email="teste@teste.com")
-        c = Carteira(id=UUID("123e4567-e89b-12d3-a456-426614174000"))
-        u.carteiras.append(c)
-        se.add(u)
-        se.add(c)
+        # c = Carteira(id=UUID("123e4567-e89b-12d3-a456-426614174000"))
+        # u.carteiras.append(c)
+        # se.add(u)
+        # se.add(c)
         se.commit()
