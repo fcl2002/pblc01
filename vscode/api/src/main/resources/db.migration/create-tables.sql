@@ -22,7 +22,6 @@ create table ativo (
     number_of_quotas integer not null,
     current_value float(,2) not null,
 
-
     wallet_id UUID,
     foreign key (wallet_id) references carteira(id),
     stock_price_id UUID,
@@ -59,7 +58,7 @@ create table fixo (
     valorFace integer not null,
 );
 
--- Tabela de variável
+-- Tabela de ativo variável
 create table variavel (
     id UUID default gen_ramdon_uuid() primary key,
     ticker varchar(10) not null,
