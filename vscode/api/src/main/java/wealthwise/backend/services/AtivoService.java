@@ -8,7 +8,5 @@ import wealthwise.backend.repositories.AtivoRepository;
 
 @Service("ativoService")
 public class AtivoService extends BaseService <Ativo, UUID, AtivoRepository> {
-    public AtivoService(AtivoRepository repository) {
-        super(repository);
-    }
+
 }

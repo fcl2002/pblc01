@@ -9,7 +9,5 @@ import wealthwise.backend.repositories.CarteiraRepository;
 
 @Service
 public class CarteiraService extends BaseService<Carteira, UUID, CarteiraRepository> {
-    public CarteiraService(CarteiraRepository repository) {
-        super(repository);
-    }
+
 }

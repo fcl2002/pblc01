@@ -9,7 +9,5 @@ import wealthwise.backend.repositories.CotacaoRepository;
 
 @Service
 public class CotacaoService extends BaseService <Cotacao, UUID, CotacaoRepository> {
-    public CotacaoService(CotacaoRepository repository) {
-        super(repository);
-    }
+
 }

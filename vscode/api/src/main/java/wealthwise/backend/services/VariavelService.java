@@ -9,7 +9,5 @@ import wealthwise.backend.repositories.VariavelRepository;
 
 @Service
 public class VariavelService extends BaseService <Variavel, UUID, VariavelRepository> {
-    public VariavelService(VariavelRepository repository) {
-        super(repository);
-    }
+
 }

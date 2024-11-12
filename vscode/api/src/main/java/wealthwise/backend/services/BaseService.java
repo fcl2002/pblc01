@@ -11,10 +11,6 @@ public class BaseService <T, ID, JTA extends JpaRepository<T, ID>> {
     @Autowired
     private JTA repository;
 
-    public BaseService(JTA repository) {
-        this.repository = repository;
-    }
-
     public Optional<T> getId(ID id) {
         return repository.findById(id);
     }

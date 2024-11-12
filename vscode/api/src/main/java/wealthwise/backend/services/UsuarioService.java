@@ -9,7 +9,5 @@ import wealthwise.backend.repositories.UsuarioRepository;
 
 @Service
 public class UsuarioService extends BaseService <Usuario, UUID, UsuarioRepository> {
-    public UsuarioService(UsuarioRepository repository) {
-        super(repository);
-    }
+
 }

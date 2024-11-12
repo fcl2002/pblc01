@@ -9,7 +9,4 @@ import wealthwise.backend.repositories.FixoRepository;
 
 @Service
 public class FixoService extends BaseService <Fixo, UUID, FixoRepository> {
-    public FixoService(FixoRepository repository) {
-        super(repository);
-    }
 }

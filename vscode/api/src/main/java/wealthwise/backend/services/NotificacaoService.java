@@ -9,7 +9,5 @@ import wealthwise.backend.repositories.NotificacaoRepository;
 
 @Service
 public class NotificacaoService extends BaseService <Notificacao, UUID, NotificacaoRepository> {
-    public NotificacaoService(NotificacaoRepository repository) {
-        super(repository);
-    }
+
 }
