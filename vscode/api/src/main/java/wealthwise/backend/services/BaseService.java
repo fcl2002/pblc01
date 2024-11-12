@@ -7,11 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-@Service
 public class BaseService <T, ID, JTA extends JpaRepository<T, ID>> {
     
     @Autowired
     private JTA repository;
+
+    public BaseService(JTA repository) {
+        this.repository = repository;
+    }
 
     public Optional<T> getId(ID id) {
         return repository.findById(id);
