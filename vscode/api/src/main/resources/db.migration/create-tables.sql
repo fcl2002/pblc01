@@ -2,7 +2,7 @@
 create database if not exists wealth;
 
 -- Seleção do banco de dados
-use wealth;
+use wealthwise;
 
 -- Exclusão das tabelas existentes, se houver
 drop table if exists ativo;
@@ -79,9 +79,8 @@ create table notificacao (
 
 -- Tabela de usuário
 create table usuario (
-    id UUID default gen_ramdon_uuid() primary key,
+    username varchar(50) primary key,
     email varchar(100) not null,
-    username varchar(100) not null,
     userpass varchar(20) not null,
     is_active boolean not null default TRUE,
     is_super boolan not null default FALSE,

@@ -30,7 +30,7 @@ public class UsuarioController {
     }
 
     // get localhost:8080/usuario/{string}
-    @GetMapping("/{string}")
+    @GetMapping("/{username}")
     public Usuario getEmail(@PathVariable String username) {
         return usuarioService.getId(username).orElse(null);
     }
