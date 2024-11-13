@@ -1,7 +1,6 @@
 package wealthwise.backend.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,9 +30,9 @@ public class UsuarioController {
     }
 
     // get localhost:8080/usuario/{string}
-    @GetMapping("/{uuid}")
-    public Usuario getEmail(@PathVariable UUID id) {
-        return usuarioService.getId(id).orElse(null);
+    @GetMapping("/{string}")
+    public Usuario getEmail(@PathVariable String username) {
+        return usuarioService.getId(username).orElse(null);
     }
 
     // insert
@@ -45,15 +44,15 @@ public class UsuarioController {
 
     // update
     // put localhost:8080/usuario/{string}
-    @PutMapping("/{uuid}")
-    public Usuario putUsuario(@RequestBody Usuario usuario, @PathVariable UUID uuid) {
+    @PutMapping("/{string}")
+    public Usuario putUsuario(@RequestBody Usuario usuario, @PathVariable String username) {
         return usuarioService.update(usuario);
     }
 
     // delete
     // delete localhost:8080/usuario/{string}
-    @DeleteMapping("/{uuid}")
-    public void deleteEmail(@PathVariable UUID id) {
-        usuarioService.deleteId(id);
+    @DeleteMapping("/{string}")
+    public void deleteEmail(@PathVariable String username) {
+        usuarioService.deleteId(username);
     }
 }

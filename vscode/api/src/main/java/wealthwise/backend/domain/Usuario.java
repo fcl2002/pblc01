@@ -6,13 +6,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.GeneratedValue;
 
 @Data
 @Entity
@@ -22,11 +20,9 @@ import jakarta.persistence.GeneratedValue;
 
 public class Usuario {
     @Id
-    @GeneratedValue
-    private UUID id;
+    private String username;
 
     private String email;
-    private String username;
     private String userpass;
     private boolean is_active;
     private boolean is_super;
