@@ -23,36 +23,29 @@ public class UsuarioController {
     @Autowired
     private UsuarioService usuarioService;
 
-    // get localhost:8080/usuario/all
     @GetMapping("/all")
     public List<Usuario> getAll() {
         return usuarioService.getAll();
     }
 
-    // get localhost:8080/usuario/{string}
     @GetMapping("/{username}")
-    public Usuario getEmail(@PathVariable String username) {
+    public Usuario getUsername(@PathVariable String username) {
         return usuarioService.getId(username).orElse(null);
     }
 
-    // insert
-    // post localhost:8080/usuario
     @PostMapping
     public Usuario postUsuario(@RequestBody Usuario usuario) {
         return usuarioService.create(usuario);
     }
 
-    // update
-    // put localhost:8080/usuario/{string}
-    @PutMapping("/{string}")
+    @PutMapping("/{username}")
     public Usuario putUsuario(@RequestBody Usuario usuario, @PathVariable String username) {
         return usuarioService.update(usuario);
     }
 
-    // delete
     // delete localhost:8080/usuario/{string}
-    @DeleteMapping("/{string}")
-    public void deleteEmail(@PathVariable String username) {
+    @DeleteMapping("/{username}")
+    public void deleteUsername(@PathVariable String username) {
         usuarioService.deleteId(username);
     }
 }

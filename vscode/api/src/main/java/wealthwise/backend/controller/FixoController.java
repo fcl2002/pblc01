@@ -1,7 +1,6 @@
 package wealthwise.backend.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,36 +23,28 @@ public class FixoController {
     @Autowired
     private FixoService fixoService;
 
-    // get localhost:8080/ativofixo/all
     @GetMapping("/all")
     public List<Fixo> getAll() {
         return fixoService.getAll();
     }
 
-    // get localhost:8080/ativofixo/{string}
-    @GetMapping("/{string}")
-    public Fixo getAtivoFixo(@PathVariable String name) {
-        return fixoService.getId(name).orElse(null);
+    @GetMapping("/{id}")
+    public Fixo getAtivoFixoByName(@PathVariable Long id) {
+        return fixoService.getId(id).orElse(null);
     }
 
-    // insert
-    // post localhost:8080/ativofixo
     @PostMapping
     public Fixo postAtivoFixo(@RequestBody Fixo ativoFixo) {
         return fixoService.create(ativoFixo);
     }
 
-    // update
-    // put localhost:8080/ativofixo/{string}
-    @PutMapping("/{uuid}")
-    public Fixo putAtivoFixo(@RequestBody Fixo ativoFixo, @PathVariable UUID uuid) {
+    @PutMapping("/{id}")
+    public Fixo putAtivoFixo(@RequestBody Fixo ativoFixo, @PathVariable Long id) {
         return fixoService.update(ativoFixo);
     }
 
-    // delete
-    // delete localhost:8080/ativo/{string}
-    @DeleteMapping("/{uuid}")
-    public void deleteAtivoFixo(@PathVariable UUID id) {
+    @DeleteMapping("/{id}")
+    public void deleteAtivoFixo(@PathVariable Long id) {
         fixoService.deleteId(id);
     }
 }

@@ -5,7 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.UUID;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
@@ -17,11 +18,12 @@ import jakarta.persistence.GeneratedValue;
 @Entity
 @Getter
 @Setter
+@DynamicUpdate
 
 public abstract class Ativo {
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     private String name;
     private double invested_value;

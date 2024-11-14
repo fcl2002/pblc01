@@ -1,6 +1,5 @@
 package wealthwise.backend.services;
 
-
 import org.springframework.stereotype.Service;
 
 import wealthwise.backend.domain.Usuario;

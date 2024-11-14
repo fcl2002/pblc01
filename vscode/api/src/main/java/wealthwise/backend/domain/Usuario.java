@@ -1,6 +1,5 @@
 package wealthwise.backend.domain;
 
-
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,9 +20,9 @@ import jakarta.persistence.OneToMany;
 public class Usuario {
     @Id
     private String username;
-
+    
     private String email;
-    private String userpass;
+    private String password;
     private boolean is_active;
     private boolean is_super;
     private String risk_profile;
