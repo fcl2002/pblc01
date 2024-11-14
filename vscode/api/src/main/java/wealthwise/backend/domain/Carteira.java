@@ -1,7 +1,8 @@
 package wealthwise.backend.domain;
 
 import java.util.List;
-import java.util.UUID;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import lombok.Data;
 import lombok.Getter;
@@ -18,12 +19,13 @@ import jakarta.persistence.GeneratedValue;
 @Entity
 @Getter
 @Setter
+@DynamicUpdate
 @Table(name = "carteira")
 
 public class Carteira {
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     private double risk;
 

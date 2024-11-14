@@ -1,7 +1,8 @@
 package wealthwise.backend.domain;
 
 import java.util.Date;
-import java.util.UUID;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -17,12 +18,13 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@DynamicUpdate
 @Table(name = "cotacao")
 
 public class Cotacao {
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
     
     private float price;
     private Date date;
