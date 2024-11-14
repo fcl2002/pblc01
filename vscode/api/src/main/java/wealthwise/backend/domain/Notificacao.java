@@ -1,6 +1,6 @@
 package wealthwise.backend.domain;
 
-import java.util.UUID;
+import org.hibernate.annotations.DynamicUpdate;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,11 +16,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "notificacao")
+@DynamicUpdate
 
 public class Notificacao {
     @Id
     @GeneratedValue
-    private UUID id;
+    private Long id;
 
     private String notification_message;
     private String message_type;
