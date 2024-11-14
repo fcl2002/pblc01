@@ -1,7 +1,6 @@
 package wealthwise.backend.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +30,8 @@ public class CarteiraController {
     }
 
     // get localhost:8080/carteira/{string}
-    @GetMapping("/{uuid}")
-    public Carteira getId(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public Carteira getId(@PathVariable Long id) {
         return carteiraService.getId(id).orElse(null);
     }
 
@@ -45,15 +44,15 @@ public class CarteiraController {
 
     // update
     // put localhost:8080/carteira/{string}
-    @PutMapping("/{uuid}")
-    public Carteira putCarteira(@RequestBody Carteira carteira, @PathVariable UUID uuid) {
+    @PutMapping("/{id}")
+    public Carteira putCarteira(@RequestBody Carteira carteira, @PathVariable Long id) {
         return carteiraService.update(carteira);
     }
 
     // delete
     // delete localhost:8080/carteira/{string}
-    @DeleteMapping("/{uuid}")
-    public void deleteId(@PathVariable UUID id) {
+    @DeleteMapping("/{id}")
+    public void deleteId(@PathVariable Long id) {
         carteiraService.deleteId(id);
     }
 }

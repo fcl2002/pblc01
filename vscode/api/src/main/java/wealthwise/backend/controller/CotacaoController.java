@@ -1,7 +1,6 @@
 package wealthwise.backend.controller;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,8 +30,8 @@ public class CotacaoController {
     }
 
     // get localhost:8080/cotacao/{string}
-    @GetMapping("/{uuid}")
-    public Cotacao getId(@PathVariable UUID id) {
+    @GetMapping("/{id}")
+    public Cotacao getId(@PathVariable Long id) {
         return cotacaoService.getId(id).orElse(null);
     }
 
@@ -45,15 +44,15 @@ public class CotacaoController {
 
     // update
     // put localhost:8080/cotacao/{string}
-    @PutMapping("/{uuid}")
-    public Cotacao putUsuario(@RequestBody Cotacao cotacao, @PathVariable UUID uuid) {
+    @PutMapping("/{id}")
+    public Cotacao putUsuario(@RequestBody Cotacao cotacao, @PathVariable Long id) {
         return cotacaoService.update(cotacao);
     }
 
     // delete
     // delete localhost:8080/cotacao/{string}
-    @DeleteMapping("/{uuid}")
-    public void deleteId(@PathVariable UUID id) {
+    @DeleteMapping("/{id}")
+    public void deleteId(@PathVariable Long id) {
         cotacaoService.deleteId(id);
     }
 }
