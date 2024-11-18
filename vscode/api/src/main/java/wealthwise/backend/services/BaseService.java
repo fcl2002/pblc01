@@ -11,6 +11,11 @@ public class BaseService <T, ID, JTA extends JpaRepository<T, ID>> {
     @Autowired
     private JTA repository;
 
+    // public <T, ID> T getEntityById(ID id, JpaRepository<T, ID> repository, String exceptionMessage) {
+    //     return repository.findById(id)
+    //             .orElseThrow(() -> new IllegalArgumentException(exceptionMessage));
+    // }
+
     public Optional<T> getId(ID id) {
         return repository.findById(id);
     }

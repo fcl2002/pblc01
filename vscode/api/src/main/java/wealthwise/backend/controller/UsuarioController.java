@@ -9,6 +9,7 @@ import wealthwise.backend.domain.Usuario;
 import wealthwise.backend.services.UsuarioService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,28 +25,32 @@ public class UsuarioController {
     private UsuarioService usuarioService;
 
     @GetMapping("/all")
-    public List<Usuario> getAll() {
-        return usuarioService.getAll();
+    public ResponseEntity<List<Usuario>> getAllUsers() {
+        List<Usuario> users = usuarioService.getAll();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{username}")
-    public Usuario getUsername(@PathVariable String username) {
-        return usuarioService.getId(username).orElse(null);
+    public ResponseEntity<Usuario> getUser(@PathVariable String username) {
+        Usuario user = usuarioService.getId(username).orElse(null);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public Usuario postUsuario(@RequestBody Usuario usuario) {
-        return usuarioService.create(usuario);
+    public ResponseEntity<Usuario> postUser(@RequestBody Usuario usuario) {
+        Usuario user = usuarioService.create(usuario);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{username}")
-    public Usuario putUsuario(@RequestBody Usuario usuario, @PathVariable String username) {
-        return usuarioService.update(usuario);
+    public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario, @PathVariable String username) {
+        Usuario user = usuarioService.update(usuario);
+        return ResponseEntity.ok(user);
     }
 
-    // delete localhost:8080/usuario/{string}
     @DeleteMapping("/{username}")
-    public void deleteUsername(@PathVariable String username) {
-        usuarioService.deleteId(username);
+    public ResponseEntity<String> deleteUser(@PathVariable String username) {
+        usuarioService.deleteUser(username);
+        return ResponseEntity.ok("User deleted (id: " + username + ")");
     }
 }
