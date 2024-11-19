@@ -18,7 +18,7 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
     public Usuario getUserById(String userID) {
 
         return usuarioRepository.findById(userID)
-                .orElseThrow(() -> new IllegalArgumentException("Barber not found with id - " + userID));
+                .orElseThrow(() -> new IllegalArgumentException("User not found with id - " + userID));
     }
 
     private String getIdFromEntity(Usuario user) {
@@ -27,7 +27,7 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
             idField.setAccessible(true);
             return (String) idField.get(user);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            throw new RuntimeException("Erro ao recuperar ID do objeto.", e);
+            throw new RuntimeException("Can't recover object's ID.", e);
         }
     }
 
@@ -35,7 +35,7 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
         String id = getIdFromEntity(user);
     
         if (id != null && usuarioRepository.existsById(id))
-            throw new IllegalArgumentException("Objeto já existe e não pode ser criado novamente.");
+            throw new IllegalArgumentException("Object already registered.");
     
         return usuarioRepository.save(user);
     }
@@ -62,7 +62,7 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
 
     public void deleteUser(String userID) {
 
-        Usuario user = getUserById(userID); // Will throw exception if not found
+        Usuario user = getUserById(userID);
         usuarioRepository.delete(user);
     }
 }
