@@ -1,5 +1,6 @@
 package wealthwise.backend.services;
 
+import java.util.Optional;
 import java.lang.reflect.Field;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,25 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
         return usuarioRepository.save(user);
     }
 
+    public Usuario updateUser(Usuario updatedUser, String userID) {
+        
+        Optional<Usuario> result = usuarioRepository.findById(userID);
+
+        if(result.isPresent()) {
+            Usuario existingUser = getUserById(updatedUser.getUsername());
+    
+            if (updatedUser.getEmail() != null)
+                existingUser.setEmail(updatedUser.getEmail());
+            if (updatedUser.getPassword() != null)
+                existingUser.setPassword(updatedUser.getPassword());
+            if (updatedUser.getRisk_profile() != null)
+                existingUser.setRisk_profile(updatedUser.getRisk_profile());
+    
+            return usuarioRepository.save(existingUser);
+
+        } else
+            throw new IllegalArgumentException("Username does not exist - " + updatedUser.getUsername());
+    }
 
     public void deleteUser(String userID) {
 

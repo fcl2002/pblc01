@@ -1,20 +1,18 @@
--- -- Criação do banco de dados
--- create database if not exists wealth;
+-- Criação do banco de dados
+create database if not exists wealth;
 
--- -- Seleção do banco de dados
--- use wealthwise;
+-- Seleção do banco de dados
+use wealthwise;
 
--- -- Exclusão das tabelas existentes, se houver
--- drop table if exists ativo;
--- drop table if exists carteira;
--- drop table if exists cotacao;
--- drop table if exists fixo;
--- drop table if exists notificacao;
--- drop table if exists usuario;
+-- Exclusão das tabelas existentes, se houver
+drop table if exists ativo;
+drop table if exists carteira;
+drop table if exists cotacao;
+drop table if exists fixo;
+drop table if exists notificacao;
+drop table if exists usuario;
 
--- create extension if not exists "pgcrypto";
-
--- -- Tabela de ativo
+-- Tabela de ativo
 -- create table ativo (
 --     id UUID default gen_ramdon_uuid() primary key,
 --     asset_name varchar(100) not null,
@@ -77,17 +75,17 @@
 --     foreign key (stock_price_id) references cotacao(id)
 -- );
 
--- -- Tabela de usuário
--- create table usuario (
---     username varchar(50) primary key,
---     email varchar(100) not null,
---     userpass varchar(20) not null,
---     is_active boolean not null default true,
---     is_super boolean not null default false,
---     risk_profile varchar(30) not null,
+-- Tabela de usuário
+create table usuario (
+    username varchar(50) primary key,
+    email varchar(100) not null,
+    userpass varchar(20) not null,
+    is_active boolean not null default true,
+    is_super boolean not null default false,
+    risk_profile varchar(30) not null,
 
---     notification_id UUID,
---     foreign key (notification_id) references notificacao(id),
---     wallet_id UUID,
---     foreign key (wallet_id) references carteira(id)
--- );
+    notification_id UUID,
+    foreign key (notification_id) references notificacao(id),
+    wallet_id UUID,
+    foreign key (wallet_id) references carteira(id)
+);
