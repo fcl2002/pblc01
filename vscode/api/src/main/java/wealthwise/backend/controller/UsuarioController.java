@@ -44,7 +44,6 @@ public class UsuarioController {
 
     @PutMapping("/{username}")
     public ResponseEntity<Usuario> updateUser(@RequestBody Usuario usuario, @PathVariable String username) {
-        System.out.println(username);
         Usuario user = usuarioService.updateUser(usuario, username);
         return ResponseEntity.ok(user);
     }
