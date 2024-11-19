@@ -45,7 +45,7 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
         Optional<Usuario> result = usuarioRepository.findById(userID);
 
         if(result.isPresent()) {
-            Usuario existingUser = getUserById(updatedUser.getUsername());
+            Usuario existingUser = getUserById(userID);
     
             if (updatedUser.getEmail() != null)
                 existingUser.setEmail(updatedUser.getEmail());

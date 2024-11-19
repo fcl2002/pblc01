@@ -29,7 +29,7 @@ public class Carteira {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Wallet must have a name")
     private String name;
     private double risk;
 
