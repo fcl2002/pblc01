@@ -1,5 +1,7 @@
 package wealthwise.backend.services;
 
+import java.lang.reflect.Field;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,26 @@ public class UsuarioService extends BaseService <Usuario, String, UsuarioReposit
         return usuarioRepository.findById(userID)
                 .orElseThrow(() -> new IllegalArgumentException("Barber not found with id - " + userID));
     }
+
+    private String getIdFromEntity(Usuario user) {
+        try {
+            Field idField = user.getClass().getDeclaredField("username");
+            idField.setAccessible(true);
+            return (String) idField.get(user);
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            throw new RuntimeException("Erro ao recuperar ID do objeto.", e);
+        }
+    }
+
+    public Usuario createUser(Usuario user) {
+        String id = getIdFromEntity(user);
+    
+        if (id != null && usuarioRepository.existsById(id))
+            throw new IllegalArgumentException("Objeto já existe e não pode ser criado novamente.");
+    
+        return usuarioRepository.save(user);
+    }
+
 
     public void deleteUser(String userID) {
 

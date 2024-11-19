@@ -8,11 +8,13 @@ import java.util.List;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 @Data
 @Entity
@@ -24,13 +26,21 @@ public class Usuario {
     @Id
     private String username;
     
-    @NotBlank
+    @Email
+    @Column(nullable = false, unique = true, length = 255)
+    @NotBlank(message = "Email cannot be null and must be unique")
     private String email;
-    @NotNull
+    
+    @Column(nullable = false)
+    @NotNull(message = "Password cannot be null")
+    @NotBlank(message = "Password cannot be blank")
     private String password;
-    private boolean is_active;
-    private boolean is_super;
+
     private String risk_profile;
+
+    // Admin
+    private boolean is_super;
+    private boolean is_active;
 
     @OneToMany
     private List<Carteira> carteiras;
