@@ -15,8 +15,9 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
     @Autowired
     private CarteiraRepository carteiraRepository;
 
-    public Carteira getUserById(Long carteiraID) {
 
+
+    public Carteira getUserById(Long carteiraID) {
         return carteiraRepository.findById(carteiraID)
                 .orElseThrow(() -> new IllegalArgumentException("Carteira not found with id - " + carteiraID));
     }
@@ -36,13 +37,12 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
         Long id = getIdFromEntity(carteira);
     
         if (id != null && carteiraRepository.existsById(id))
-            throw new IllegalArgumentException("Object already registered.");
-    
+            throw new IllegalArgumentException("Object already registered.");        
+
         return carteiraRepository.save(carteira);
     }
 
     public Carteira updateCarteira(Carteira updatedCarteira, Long carteiraID){
-
         Optional<Carteira> result = carteiraRepository.findById(carteiraID);
         
         if(result.isPresent()){

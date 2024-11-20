@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,6 +36,7 @@ public class Carteira {
     private Double risk;
 
     @ManyToOne
+    @JsonBackReference
     private Usuario usuario;
     @OneToMany
     private List<Ativo> ativos;
