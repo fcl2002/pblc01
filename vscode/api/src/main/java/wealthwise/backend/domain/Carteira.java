@@ -31,7 +31,7 @@ public class Carteira {
 
     @NotBlank(message = "Wallet must have a name")
     private String name;
-    private double risk;
+    private Double risk;
 
     @ManyToOne
     private Usuario usuario;
