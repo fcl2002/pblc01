@@ -15,9 +15,7 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
     @Autowired
     private CarteiraRepository carteiraRepository;
 
-
-
-    public Carteira getUserById(Long carteiraID) {
+    public Carteira getCarteiraById(Long carteiraID) {
         return carteiraRepository.findById(carteiraID)
                 .orElseThrow(() -> new IllegalArgumentException("Carteira not found with id - " + carteiraID));
     }
@@ -46,7 +44,7 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
         Optional<Carteira> result = carteiraRepository.findById(carteiraID);
         
         if(result.isPresent()){
-            Carteira existingCarteira = getUserById(carteiraID);
+            Carteira existingCarteira = getCarteiraById(carteiraID);
 
             if(updatedCarteira.getName() != null)
                 existingCarteira.setName(updatedCarteira.getName());

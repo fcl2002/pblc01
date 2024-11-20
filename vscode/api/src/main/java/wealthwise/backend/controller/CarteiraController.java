@@ -51,7 +51,7 @@ public class CarteiraController {
         carteiras.add(carteira);
         usuario.setCarteiras(carteiras);
 
-        Carteira savedCarteira = carteiraService.create(carteira);
+        Carteira savedCarteira = carteiraService.createCarteira(carteira);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedCarteira);
     }
 

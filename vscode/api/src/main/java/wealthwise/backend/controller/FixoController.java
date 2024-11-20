@@ -9,6 +9,8 @@ import wealthwise.backend.domain.Fixo;
 import wealthwise.backend.services.FixoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,27 +26,32 @@ public class FixoController {
     private FixoService fixoService;
 
     @GetMapping("/all")
-    public List<Fixo> getAll() {
-        return fixoService.getAll();
+    public ResponseEntity<List<Fixo>> getAllFixo() {
+        List<Fixo> fixos = fixoService.getAll();
+        return ResponseEntity.ok(fixos);
     }
 
     @GetMapping("/{id}")
-    public Fixo getAtivoFixoByName(@PathVariable Long id) {
-        return fixoService.getId(id).orElse(null);
+    public ResponseEntity<Fixo> getId(@PathVariable Long id) {
+        Fixo fixo = fixoService.getId(id).orElse(null);
+        return ResponseEntity.ok(fixo);
     }
 
     @PostMapping
-    public Fixo postAtivoFixo(@RequestBody Fixo ativoFixo) {
-        return fixoService.create(ativoFixo);
+    public ResponseEntity<Fixo> postFixo(@RequestBody Fixo fixo) {
+        Fixo savedFixo = fixoService.createFixo(fixo);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedFixo);
     }
 
     @PutMapping("/{id}")
-    public Fixo putAtivoFixo(@RequestBody Fixo ativoFixo, @PathVariable Long id) {
-        return fixoService.update(ativoFixo);
+    public ResponseEntity<Fixo> putFixo(@RequestBody Fixo fixo, @PathVariable Long id) {
+        Fixo fixo1 = fixoService.updateFixo(fixo, id);
+        return ResponseEntity.ok(fixo1);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteAtivoFixo(@PathVariable Long id) {
+    public ResponseEntity<String> deleteFixo(@PathVariable Long id) {
         fixoService.deleteId(id);
+        return ResponseEntity.ok("Ativo Fixo deleted (id: " + id + ")");
     }
 }

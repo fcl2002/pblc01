@@ -14,8 +14,8 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 
 public class Fixo extends Ativo {
-    private double profitability;
-    private int period;
-    private boolean is_taxable; // imposto de renda
-    private int face_value;
+    private Double profitability;
+    private Integer period;
+    private Boolean is_taxable; // imposto de renda
+    private Integer face_value;
 }
