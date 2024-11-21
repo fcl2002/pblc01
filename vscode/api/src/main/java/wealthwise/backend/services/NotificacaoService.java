@@ -1,7 +1,9 @@
 package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +67,23 @@ public class NotificacaoService extends BaseService <Notificacao, Long, Notifica
             throw new IllegalArgumentException("Notificacao does not exist - " + updatedNotificacao.getId());
     }
 
-    public void deleteId(Long id) {
+    public void deleteNotificacao(Long id) {
+        
+        Usuario usuario = usuarioService.getUserById(getNotificacaoById(id).getUsuario().getUsername());
+        
+        if(Objects.nonNull(usuario)){
+            List<Notificacao> notificacoes = usuario.getNotificacoes();
+
+            for(Iterator<Notificacao> it = notificacoes.iterator(); it.hasNext();) {
+                Notificacao notificacao = it.next();
+                if(notificacao.getId().equals(id)){
+                    notificacao.setUsuario(null);
+                    it.remove();
+                    break;
+                }
+            }
+        }
+
         notificacaoRepository.deleteById(id);
     }
 }

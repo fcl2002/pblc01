@@ -9,18 +9,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Entity
-@Getter
-@Setter
 @DynamicUpdate
 @Table(name = "cotacao")
 
@@ -32,7 +27,7 @@ public class Cotacao {
     Double valor;
     Date data;
     
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne
     @JsonBackReference
     private Ativo ativo;
 }

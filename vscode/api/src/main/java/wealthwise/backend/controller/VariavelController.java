@@ -52,7 +52,7 @@ public class VariavelController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteVariavel(@PathVariable Long id) {
-        variavelService.deleteId(id);
+        variavelService.deleteVariavel(id);
         return ResponseEntity.ok("Ativo Variavel deleted (id: " + id + ")");
     }
 }

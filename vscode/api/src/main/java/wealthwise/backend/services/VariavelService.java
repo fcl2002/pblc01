@@ -1,6 +1,8 @@
 package wealthwise.backend.services;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.lang.reflect.Field;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import wealthwise.backend.domain.Ativo;
 import wealthwise.backend.domain.Carteira;
+import wealthwise.backend.domain.Notificacao;
 import wealthwise.backend.domain.Variavel;
 import wealthwise.backend.repositories.VariavelRepository;
 
@@ -20,7 +23,7 @@ public class VariavelService extends BaseService <Variavel, Long, VariavelReposi
     @Autowired
     private CarteiraService carteiraService;
 
-    public Variavel getFixoById(Long id) {
+    public Variavel getVariavelById(Long id) {
         return variavelRepository.findById(id)
         .orElseThrow(() -> new IllegalArgumentException("Variavel not found with id - " + id));
     }
@@ -57,7 +60,7 @@ public class VariavelService extends BaseService <Variavel, Long, VariavelReposi
         Optional<Variavel> result = variavelRepository.findById(fixoID);
 
         if(result.isPresent()) {
-            Variavel existingVariavel = getFixoById(fixoID);
+            Variavel existingVariavel = getVariavelById(fixoID);
     
             if (updatedVariavel.getName() != null)
                 existingVariavel.setName(updatedVariavel.getName());
@@ -79,7 +82,33 @@ public class VariavelService extends BaseService <Variavel, Long, VariavelReposi
             throw new IllegalArgumentException("Variavel's id does not exist - " + updatedVariavel.getId());
     }
 
-    public void deleteId(Long id) {
+    public void deleteVariavel(Long id) {
+        Carteira carteira = carteiraService.getCarteiraById(getVariavelById(id).getCarteira().getId());
+        List<Notificacao> notificacoes = getVariavelById(id).getCarteira().getUsuario().getNotificacoes();
+        
+        if(Objects.nonNull(carteira)){
+            List<Ativo> ativos = carteira.getAtivos();
+
+            for(Iterator<Ativo> it = ativos.iterator(); it.hasNext();) {
+                Ativo ativo = it.next();
+                if(ativo.getId() == id){
+                    ativo.setCarteira(null);
+                    it.remove();
+                    break;
+                }
+            }
+        }
+
+        if(Objects.nonNull(notificacoes)){
+            for(Iterator<Notificacao> it = notificacoes.iterator(); it.hasNext();) {
+                Notificacao notificacao = it.next();
+                if(notificacao.getCotacao().getId() == id){
+                    notificacao.setCotacao(null);
+                    it.remove();
+                }
+            }
+        }
+
         variavelRepository.deleteById(id);
     }
 }

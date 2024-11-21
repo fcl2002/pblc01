@@ -51,7 +51,7 @@ public class NotificacaoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteNotificacao(@PathVariable Long id) {
-        notificacaoService.deleteId(id);
+        notificacaoService.deleteNotificacao(id);
         return ResponseEntity.ok("Notificacao deleted (id: " + id + ")");
     }
 }

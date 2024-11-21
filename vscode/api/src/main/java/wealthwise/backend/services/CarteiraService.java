@@ -2,12 +2,15 @@ package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wealthwise.backend.domain.Carteira;
+import wealthwise.backend.domain.Notificacao;
 import wealthwise.backend.domain.Usuario;
 import wealthwise.backend.repositories.CarteiraRepository;
 
@@ -68,7 +71,33 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
             throw new IllegalArgumentException("Carteira does not exist - " + updatedCarteira.getId());
     }
 
-    public void deleteId(Long id) {
+    public void deleteCarteira(Long id) {
+        Usuario usuario = usuarioService.getUserById(getCarteiraById(id).getUsuario().getUsername());
+        List<Notificacao> notificacoes = getCarteiraById(id).getUsuario().getNotificacoes();
+
+        if(Objects.nonNull(usuario)){
+            List<Carteira> carteiras = usuario.getCarteiras();
+
+            for(Iterator<Carteira> it = carteiras.iterator(); it.hasNext();) {
+                Carteira carteira = it.next();
+                if(carteira.getId().equals(id)){
+                    carteira.setUsuario(null);
+                    it.remove();
+                    break;
+                }
+            }
+        }
+        
+        if(Objects.nonNull(notificacoes)){
+            for(Iterator<Notificacao> it = notificacoes.iterator(); it.hasNext();) {
+                Notificacao notificacao = it.next();
+                if(notificacao.getCotacao().getId() == id){
+                    notificacao.setCotacao(null);
+                    it.remove();
+                }
+            }
+        }
+
         carteiraRepository.deleteById(id);
     }
 }

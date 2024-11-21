@@ -51,7 +51,7 @@ public class CarteiraController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteCarteira(@PathVariable Long id) {
-        carteiraService.deleteId(id);
+        carteiraService.deleteCarteira(id);
         return ResponseEntity.ok("Carteira deleted (id: " + id + ")");
     }
 }

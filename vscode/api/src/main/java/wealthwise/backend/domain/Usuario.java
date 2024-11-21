@@ -1,10 +1,10 @@
 package wealthwise.backend.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
+
+import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -21,8 +21,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Data
 @Entity
-@Getter
-@Setter
+@DynamicUpdate
 @Table(name = "usuario")
 
 public class Usuario {
@@ -45,9 +44,11 @@ public class Usuario {
     private boolean is_super;
     private boolean is_active;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Carteira> carteiras;
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
     private List<Notificacao> notificacoes;
 }

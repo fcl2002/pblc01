@@ -8,8 +8,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
@@ -23,8 +21,6 @@ import jakarta.persistence.GenerationType;
 
 @Data
 @Entity
-@Getter
-@Setter
 @DynamicUpdate
 @Table(name = "carteira")
 
@@ -37,11 +33,11 @@ public class Carteira {
     private String name;
     private Double risk;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JsonBackReference
     private Usuario usuario;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Ativo> ativos;
 }

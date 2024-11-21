@@ -1,5 +1,7 @@
 package wealthwise.backend.domain;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
@@ -13,6 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@DynamicUpdate
 @Table(name = "notificacao")
 
 public class Notificacao {
@@ -23,7 +26,7 @@ public class Notificacao {
     private String notification_message;
     private String message_type;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JsonBackReference
     private Usuario usuario;
     
