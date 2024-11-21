@@ -41,7 +41,7 @@ public class Carteira {
     @JsonBackReference
     private Usuario usuario;
     
-    @OneToMany(mappedBy = "carteira", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Ativo> ativos;
 }

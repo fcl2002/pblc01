@@ -45,9 +45,10 @@ public class Usuario {
     private boolean is_super;
     private boolean is_active;
 
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Carteira> carteiras;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Notificacao> notificacoes;
 }
