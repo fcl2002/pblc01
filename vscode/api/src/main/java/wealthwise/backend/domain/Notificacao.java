@@ -1,7 +1,5 @@
 package wealthwise.backend.domain;
 
-import org.hibernate.annotations.DynamicUpdate;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.CascadeType;
@@ -15,7 +13,6 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "notificacao")
-@DynamicUpdate
 
 public class Notificacao {
     @Id

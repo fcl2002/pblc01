@@ -2,11 +2,13 @@ package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import wealthwise.backend.domain.Carteira;
+import wealthwise.backend.domain.Usuario;
 import wealthwise.backend.repositories.CarteiraRepository;
 
 @Service
@@ -14,6 +16,9 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
 
     @Autowired
     private CarteiraRepository carteiraRepository;
+    
+    @Autowired
+    private UsuarioService usuarioService;
 
     public Carteira getCarteiraById(Long carteiraID) {
         return carteiraRepository.findById(carteiraID)
@@ -35,7 +40,14 @@ public class CarteiraService extends BaseService<Carteira, Long, CarteiraReposit
         Long id = getIdFromEntity(carteira);
     
         if (id != null && carteiraRepository.existsById(id))
-            throw new IllegalArgumentException("Object already registered.");        
+            throw new IllegalArgumentException("Object already registered."); 
+            
+        Usuario usuario = usuarioService.getUserById(carteira.getUsuario().getUsername());
+        
+        List<Carteira> carteiras = usuario.getCarteiras();
+        carteiras.add(carteira);
+        usuario.setCarteiras(carteiras);
+
 
         return carteiraRepository.save(carteira);
     }
