@@ -4,12 +4,15 @@ import java.util.Date;
 
 import org.hibernate.annotations.DynamicUpdate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-
+import jakarta.persistence.GenerationType;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,12 +26,13 @@ import lombok.Setter;
 
 public class Cotacao {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    private float price;
-    private Date date;
+    Double valor;
+    Date data;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JsonBackReference
     private Ativo ativo;
 }

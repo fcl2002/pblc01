@@ -8,12 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 import wealthwise.backend.domain.Cotacao;
 import wealthwise.backend.services.CotacaoService;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
@@ -23,36 +25,27 @@ public class CotacaoController {
     @Autowired
     private CotacaoService cotacaoService;
 
-    // get localhost:8080/cotacao/all
     @GetMapping("/all")
-    public List<Cotacao> getAll() {
-        return cotacaoService.getAll();
+    public ResponseEntity<List<Cotacao>> getAll() {
+        List<Cotacao> cotacoes = cotacaoService.getAll();
+        return ResponseEntity.ok(cotacoes);
     }
 
-    // get localhost:8080/cotacao/{string}
     @GetMapping("/{id}")
-    public Cotacao getId(@PathVariable Long id) {
-        return cotacaoService.getId(id).orElse(null);
+    public ResponseEntity<Cotacao> getId(@PathVariable Long id) {
+        Cotacao cotacao = cotacaoService.getId(id).orElse(null);
+        return ResponseEntity.ok(cotacao);
     }
 
-    // insert
-    // post localhost:8080/cotacao
     @PostMapping
-    public Cotacao postUsuario(@RequestBody Cotacao cotacao) {
-        return cotacaoService.create(cotacao);
+    public ResponseEntity<Cotacao> postUser(@RequestBody Cotacao cotacao) {
+        Cotacao user = cotacaoService.createCotacao(cotacao);
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
-    // update
-    // put localhost:8080/cotacao/{string}
-    @PutMapping("/{id}")
-    public Cotacao putUsuario(@RequestBody Cotacao cotacao, @PathVariable Long id) {
-        return cotacaoService.update(cotacao);
-    }
-
-    // delete
-    // delete localhost:8080/cotacao/{string}
     @DeleteMapping("/{id}")
-    public void deleteId(@PathVariable Long id) {
-        cotacaoService.deleteId(id);
+    public ResponseEntity<String> deleteCotacao(@PathVariable Long id) {
+        cotacaoService.deleteCotacao(id);
+        return ResponseEntity.ok("Cotacao deleted (id: " + id + ")");
     }
 }

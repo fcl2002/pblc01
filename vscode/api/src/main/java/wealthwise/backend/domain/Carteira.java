@@ -37,11 +37,11 @@ public class Carteira {
     private String name;
     private Double risk;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JsonBackReference
     private Usuario usuario;
     
-    @OneToMany(mappedBy = "carteira", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Ativo> ativos;
 }
