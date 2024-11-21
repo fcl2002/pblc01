@@ -9,6 +9,8 @@ import wealthwise.backend.domain.Notificacao;
 import wealthwise.backend.services.NotificacaoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,27 +26,32 @@ public class NotificacaoController {
     private NotificacaoService notificacaoService;
 
     @GetMapping("/all")
-    public List<Notificacao> getAll() {
-        return notificacaoService.getAll();
+    public ResponseEntity<List<Notificacao>> getAll() {
+        List<Notificacao> notificacoes = notificacaoService.getAll();
+        return ResponseEntity.ok(notificacoes);
     }
 
     @GetMapping("/{id}")
-    public Notificacao getNotificacao(@PathVariable Long id) {
-        return notificacaoService.getId(id).orElse(null);
+    public ResponseEntity<Notificacao> getNotificacao(@PathVariable Long id) {
+        Notificacao notificacao = notificacaoService.getId(id).orElse(null);
+        return ResponseEntity.ok(notificacao);
     }
 
     @PostMapping
-    public Notificacao postNotificacao(@RequestBody Notificacao notificacao) {
-        return notificacaoService.create(notificacao);
+    public ResponseEntity<Notificacao> postNotificacao(@RequestBody Notificacao notificacao) {
+        Notificacao notificacaoResponse = notificacaoService.createNotificacao(notificacao);
+        return ResponseEntity.status(HttpStatus.CREATED).body(notificacaoResponse);
     }
 
     @PutMapping("/{id}")
-    public Notificacao putNotificacao(@RequestBody Notificacao notificacao, @PathVariable Long id) {
-        return notificacaoService.update(notificacao);
+    public ResponseEntity<Notificacao> putNotificacao(@RequestBody Notificacao notificacao, @PathVariable Long id) {
+        Notificacao notificacao1 = notificacaoService.updateNotificacao(notificacao, id);
+        return ResponseEntity.ok(notificacao1);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteNotificacao(@PathVariable Long id) {
+    public ResponseEntity<String> deleteNotificacao(@PathVariable Long id) {
         notificacaoService.deleteId(id);
+        return ResponseEntity.ok("Notificacao deleted (id: " + id + ")");
     }
 }
