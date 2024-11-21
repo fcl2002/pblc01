@@ -25,7 +25,6 @@ public class NotificacaoService extends BaseService <Notificacao, Long, Notifica
                 .orElseThrow(() -> new IllegalArgumentException("Notificacao not found with id - " + notificacaoID));
     }
 
-
     private Long getIdFromEntity(Notificacao notificacao) {
         try {
             Field idField = notificacao.getClass().getDeclaredField("id");
@@ -43,7 +42,6 @@ public class NotificacaoService extends BaseService <Notificacao, Long, Notifica
             throw new IllegalArgumentException("Object already registered.");   
         
         Usuario usuario = usuarioService.getUserById(notificacao.getUsuario().getUsername());
-
         List<Notificacao> notificacoes = usuario.getNotificacoes();
         notificacoes.add(notificacao);
         usuario.setNotificacoes(notificacoes);

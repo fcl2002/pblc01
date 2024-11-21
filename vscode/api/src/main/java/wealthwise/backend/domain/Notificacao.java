@@ -27,7 +27,6 @@ public class Notificacao {
     @JsonBackReference
     private Usuario usuario;
     
-    @ManyToOne(cascade = CascadeType.REMOVE)
-    @JsonBackReference
+    @ManyToOne
     private Cotacao cotacao;
 }
