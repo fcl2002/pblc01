@@ -49,11 +49,11 @@ public abstract class Ativo {
     private Integer number_of_quotas;
     private Double current_value;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JsonBackReference
     private Carteira carteira;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Cotacao> cotacoes;
 }

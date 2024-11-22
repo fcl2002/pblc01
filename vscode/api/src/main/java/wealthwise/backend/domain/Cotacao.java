@@ -32,7 +32,7 @@ public class Cotacao {
     Double valor;
     Date data;
     
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     @JsonBackReference
     private Ativo ativo;
 }

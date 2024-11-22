@@ -1,7 +1,9 @@
 package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,7 +85,21 @@ public class FixoService extends BaseService <Fixo, Long, FixoRepository> {
             throw new IllegalArgumentException("Fixo's id does not exist - " + updatedFixo.getId());
     }
 
-    public void deleteId(Long id) {
+    public void deleteFixo(Long id) {
+        Carteira carteira = carteiraService.getCarteiraById(getFixoById(id).getCarteira().getId());
+
+        if(Objects.nonNull(carteira)){
+            List<Ativo> ativos = carteira.getAtivos();
+
+            for(Iterator<Ativo> it = ativos.iterator(); it.hasNext();) {
+                Ativo ativo = it.next();
+                if(ativo.getId() == id){
+                    ativo.setCarteira(null);
+                    it.remove();
+                    break;
+                }
+            }
+        }
         fixoRepository.deleteById(id);
     }
 }

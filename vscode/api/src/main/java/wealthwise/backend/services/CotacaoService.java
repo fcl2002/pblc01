@@ -1,7 +1,9 @@
 package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class CotacaoService extends BaseService <Cotacao, Long, CotacaoRepositor
 
     @Autowired
     private AtivoRepository ativoRepository;
+
+    @Autowired
+    private AtivoService ativoService;
 
     public Cotacao getCotacaoById(Long cotacaoID) {
         
@@ -54,8 +59,20 @@ public class CotacaoService extends BaseService <Cotacao, Long, CotacaoRepositor
     }
 
     public void deleteCotacao(Long cotacaoID) {
+        Ativo ativo = ativoService.getAtivoById(getCotacaoById(cotacaoID).getAtivo().getId());
+        
+        if(Objects.nonNull(ativo)){
+            List<Cotacao> cotacoes = ativo.getCotacoes();
 
-        Cotacao cotacao = getCotacaoById(cotacaoID);
-        cotacaoRepository.delete(cotacao);
+            for(Iterator<Cotacao> it = cotacoes.iterator(); it.hasNext();) {
+                Cotacao cotacao = it.next();
+                if(cotacao.getId() == cotacaoID){
+                    cotacao.setAtivo(null);
+                    it.remove();
+                    break;
+                }
+            }
+        }
+        cotacaoRepository.deleteById(cotacaoID);
     }
 }
