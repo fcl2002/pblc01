@@ -10,11 +10,13 @@ set foreign_key_checks = 0;
 drop table if exists ativo_cotacoes;
 drop table if exists carteira_ativos;
 drop table if exists usuario_carteiras;
+drop table if exists usuario_notificacoes;
 
 drop table if exists ativo;
 drop table if exists carteira;
 drop table if exists cotacao;
 drop table if exists usuario;
+drop table if exists notificacao;
 
 set foreign_key_checks = 1;
 

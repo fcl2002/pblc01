@@ -1,8 +1,6 @@
 package wealthwise.backend.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 
@@ -21,8 +19,6 @@ import jakarta.validation.constraints.NotBlank;
 
 @Data
 @Entity
-@Getter
-@Setter
 @Table(name = "usuario")
 
 public class Usuario {
@@ -48,5 +44,9 @@ public class Usuario {
     @OneToMany(cascade = CascadeType.REMOVE)
     @JsonManagedReference
     private List<Carteira> carteiras;
+
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Notificacao> notificacoes;
 
 }

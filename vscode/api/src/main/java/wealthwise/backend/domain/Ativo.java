@@ -1,12 +1,8 @@
 package wealthwise.backend.domain;
 
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
-
-import org.hibernate.annotations.DynamicUpdate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -34,9 +30,6 @@ import jakarta.persistence.GenerationType;
 
 @Data
 @Entity
-@Getter
-@Setter
-@DynamicUpdate
 
 public abstract class Ativo {
     @Id

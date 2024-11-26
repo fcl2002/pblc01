@@ -1,31 +1,29 @@
 package wealthwise.backend.domain;
 
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "cotacao")
+@Table(name = "notificacao")
 
-public class Cotacao {
+public class Notificacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    Double valor;
-    Date data;
-    
+
+    private String notification_message;
+    private String message_type;
+
     @ManyToOne(cascade = CascadeType.REFRESH)
     @JsonBackReference
-    private Ativo ativo;
+    private Usuario usuario;
 }

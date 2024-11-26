@@ -51,7 +51,7 @@ public class FixoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteFixo(@PathVariable Long id) {
-        fixoService.deleteId(id);
+        fixoService.deleteFixo(id);
         return ResponseEntity.ok("Ativo Fixo deleted (id: " + id + ")");
     }
 }

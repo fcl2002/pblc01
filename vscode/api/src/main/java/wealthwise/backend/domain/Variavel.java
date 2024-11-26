@@ -5,13 +5,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 @Entity
-@Getter
-@Setter
 @EqualsAndHashCode(callSuper = true)
 
 public class Variavel extends Ativo {
