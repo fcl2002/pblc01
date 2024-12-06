@@ -3,8 +3,8 @@ package wealthwise.backend.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import wealthwise.backend.domain.usuario.Usuario;
+import wealthwise.backend.domain.user.User;
 
-public interface UsuarioRepository extends JpaRepository <Usuario, String> {
+public interface UserRepository extends JpaRepository <User, String> {
     UserDetails findByUsername(String username);
 }

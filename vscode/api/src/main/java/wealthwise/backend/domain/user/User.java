@@ -1,10 +1,10 @@
-package wealthwise.backend.domain.usuario;
+package wealthwise.backend.domain.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import wealthwise.backend.domain.Carteira;
-import wealthwise.backend.domain.Notificacao;
+// import wealthwise.backend.domain.Carteira;
+// import wealthwise.backend.domain.Notificacao;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,18 +13,18 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+// import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.persistence.CascadeType;
+// import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.DiscriminatorType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
-import jakarta.persistence.OneToMany;
+// import jakarta.persistence.OneToMany;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -37,7 +37,7 @@ import jakarta.validation.constraints.Size;
 @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "usuarios")
 
-public class Usuario implements UserDetails {
+public class User implements UserDetails {
     
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -64,7 +64,7 @@ public class Usuario implements UserDetails {
     // @JsonManagedReference
     // private List<Notificacao> notificacoes;
 
-    public Usuario(String email, String password, String username, String risk_profile, UserRole role) {
+    public User(String email, String username, String password, String risk_profile, UserRole role) {
         this.email = email;
         this.username = username;
         this.password = password;

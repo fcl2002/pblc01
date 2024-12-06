@@ -8,26 +8,26 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
-import wealthwise.backend.domain.usuario.Usuario;
-import wealthwise.backend.repositories.UsuarioRepository;
+import wealthwise.backend.domain.user.User;
+import wealthwise.backend.repositories.UserRepository;
 
 @Service
 public class AuthorizationService implements UserDetailsService {
     
     @Autowired
-    private UsuarioRepository repository;
+    private UserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String username) {
         return repository.findByUsername(username);
     }
 
-    public Usuario getUserById(String id) {
+    public User getUserById(String id) {
         return repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id - " + id));
     }
 
-    private String getIdFromEntity(Usuario user) {
+    private String getIdFromEntity(User user) {
         try {
             Field idField = user.getClass().getDeclaredField("username");
             idField.setAccessible(true);
@@ -37,7 +37,7 @@ public class AuthorizationService implements UserDetailsService {
         }
     }
 
-    public Usuario createUser(Usuario user) {
+    public User createUser(User user) {
         String id = getIdFromEntity(user);
     
         if (id != null && repository.existsById(id))
@@ -46,12 +46,12 @@ public class AuthorizationService implements UserDetailsService {
         return repository.save(user);
     }
 
-    public Usuario updateUser(Usuario updatedUser, String id) {
+    public User updateUser(User updatedUser, String id) {
         
-        Optional<Usuario> result = repository.findById(id);
+        Optional<User> result = repository.findById(id);
 
         if(result.isPresent()) {
-            Usuario existingUser = getUserById(id);
+            User existingUser = getUserById(id);
     
             if (updatedUser.getEmail() != null)
                 existingUser.setEmail(updatedUser.getEmail());
@@ -68,7 +68,7 @@ public class AuthorizationService implements UserDetailsService {
 
     public void deleteUser(String userID) {
 
-        Usuario user = getUserById(userID);
+        User user = getUserById(userID);
         repository.delete(user);
     }
 }
