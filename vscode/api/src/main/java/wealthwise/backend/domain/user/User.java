@@ -43,7 +43,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Email
+    @Email(message = "Email's format is wrong")
     @NotNull(message = "Email can't be null")
     @Column(nullable = false, unique = true, length = 255)
     private String email;
