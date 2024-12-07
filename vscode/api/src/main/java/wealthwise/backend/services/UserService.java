@@ -1,9 +1,11 @@
 package wealthwise.backend.services;
 
 import java.lang.reflect.Field;
-import java.util.Optional;
+import java.util.Map;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import wealthwise.backend.domain.user.User;
@@ -39,24 +41,32 @@ public class UserService {
         return repository.save(user);
     }
 
-    public User updateUser(User updatedUser, String id) {
+    public User updateUser(Map< String, Object> updates, String id) {
         
-        Optional<User> result = repository.findById(id);
+        User result = repository.findById(id)
+                        .orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
 
-        if(result.isPresent()) {
-            User existingUser = getUserById(id);
-    
-            if (updatedUser.getEmail() != null)
-                existingUser.setEmail(updatedUser.getEmail());
-            if (updatedUser.getPassword() != null)
-                existingUser.setPassword(updatedUser.getPassword());
-            if (updatedUser.getRisk_profile() != null)
-                existingUser.setRisk_profile(updatedUser.getRisk_profile());
-    
-            return repository.save(existingUser);
+        updates.forEach((key, value) -> {
+            switch(key) {
+                case "email":
+                    result.setEmail((String) value);
+                    break;
+                case "username":
+                    result.setUsername((String) value);
+                    break;
+                case "password":
+                    String encryptedPassword = new BCryptPasswordEncoder().encode((String) value);
+                    result.setPassword(encryptedPassword);
+                    break;
+                case "risk_profile":
+                    result.setRisk_profile((String) value);
+                    break;
+                default:
+                    throw new IllegalArgumentException("Field: " + key + "is not valid for update.");
+            }
+        });
 
-        } else
-            throw new IllegalArgumentException("Username does not exist - " + updatedUser.getUsername());
+        return repository.save(result);
     }
 
     public void deleteUser(String userID) {
