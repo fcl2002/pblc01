@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -57,9 +58,9 @@ public class UserController {
         }
     }
 
-    // @DeleteMapping("/{username}")
-    // public ResponseEntity<String> deleteUser(@PathVariable String username) {
-    //     UserService.deleteUser(username);
-    //     return ResponseEntity.ok("User deleted (id: " + username + ")");
-    // }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable String id) {
+        userService.deleteUser(id);
+        return ResponseEntity.ok("User deleted with id: " + id);
+    }
 }

@@ -70,7 +70,6 @@ public class UserService {
     }
 
     public void deleteUser(String userID) {
-
         User user = getUserById(userID);
         repository.delete(user);
     }
