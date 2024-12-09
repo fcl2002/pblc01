@@ -7,4 +7,5 @@ import wealthwise.backend.domain.user.User;
 
 public interface UserRepository extends JpaRepository <User, String> {
     UserDetails findByUsername(String username);
+    Boolean existsByEmail(String email);
 }

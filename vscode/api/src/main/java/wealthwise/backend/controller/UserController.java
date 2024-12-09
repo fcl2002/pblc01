@@ -2,9 +2,9 @@ package wealthwise.backend.controller;
 
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import wealthwise.backend.domain.user.User;
-import wealthwise.backend.domain.user.UserResponseDTO;
+import wealthwise.backend.dtos.user.UserResponseDTO;
 import wealthwise.backend.repositories.UserRepository;
 import wealthwise.backend.services.UserService;
 
@@ -29,17 +29,17 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<List<UserResponseDTO>> getAll() {
-        List<UserResponseDTO> userList = this.userRepository.findAll().stream().map(UserResponseDTO::new).toList();
         
+        List<UserResponseDTO> userList = this.userRepository.findAll().stream().map(UserResponseDTO::new).toList();
         return ResponseEntity.ok(userList);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDTO> getUser(@PathVariable String id) {
-        User user = this.userRepository.findById(id)
-                     .orElseThrow(() -> new NoSuchElementException("User not found with id: " + id));
+        
+        User user = userService.getUserById(id);
         UserResponseDTO userDTO = new UserResponseDTO(user);
 
         return ResponseEntity.ok(userDTO);
@@ -47,20 +47,14 @@ public class UserController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<UserResponseDTO> updateUser(@RequestBody Map<String, Object> updates, @PathVariable String id) {
-        try {
-            User user = userService.updateUser(updates, id);
-            UserResponseDTO userDTO = new UserResponseDTO(user);
-            return ResponseEntity.ok(userDTO);
-        } catch (NoSuchElementException e) {
-            return ResponseEntity.notFound().build();
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
-        }
+        
+        UserResponseDTO userDTO = userService.updateUser(updates, id);
+        return ResponseEntity.status(HttpStatus.OK).body(userDTO);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable String id) {
         userService.deleteUser(id);
-        return ResponseEntity.ok("User deleted with id: " + id);
+        return ResponseEntity.status(HttpStatus.OK).body("User deleted with id '" + id + "'");
     }
 }

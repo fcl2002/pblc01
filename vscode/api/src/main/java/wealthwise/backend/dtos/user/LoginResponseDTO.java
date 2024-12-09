@@ -1,4 +1,4 @@
-package wealthwise.backend.domain.user;
+package wealthwise.backend.dtos.user;
 
 public record LoginResponseDTO(String token) {
 }

@@ -1,9 +1,9 @@
 package wealthwise.backend.controller;
 
-import wealthwise.backend.domain.user.AuthenticationDTO;
-import wealthwise.backend.domain.user.LoginResponseDTO;
-import wealthwise.backend.domain.user.RegisterDTO;
 import wealthwise.backend.domain.user.User;
+import wealthwise.backend.dtos.user.AuthenticationDTO;
+import wealthwise.backend.dtos.user.LoginResponseDTO;
+import wealthwise.backend.dtos.user.RegisterDTO;
 import wealthwise.backend.infrastructure.security.TokenService;
 import wealthwise.backend.repositories.UserRepository;
 

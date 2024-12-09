@@ -27,7 +27,6 @@ import jakarta.persistence.GenerationType;
 // import jakarta.persistence.OneToMany;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Data
@@ -43,8 +42,7 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Email(message = "Email's format is wrong")
-    @NotNull(message = "Email can't be null")
+    @Email
     @Column(nullable = false, unique = true, length = 255)
     private String email;
 
