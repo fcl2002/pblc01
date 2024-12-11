@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import wealthwise.backend.domain.user.User;
+import wealthwise.backend.domain.User;
 import wealthwise.backend.dtos.user.UserResponseDTO;
 import wealthwise.backend.repositories.UserRepository;
 import wealthwise.backend.services.UserService;

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import wealthwise.backend.domain.user.User;
+import wealthwise.backend.domain.User;
 import wealthwise.backend.dtos.user.UserResponseDTO;
 import wealthwise.backend.exceptions.ResourceNotFoundException;
 import wealthwise.backend.exceptions.IllegalFieldException;
@@ -21,12 +21,10 @@ public class UserService {
 
     public User getUserById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                    "User", 
-                    "User with ID '" + id + "' not found."));
+                .orElseThrow(() -> new ResourceNotFoundException("User with id '" + id + "' not found."));
     }
 
-    public UserResponseDTO updateUser(Map< String, Object> updates, String id) {
+    public UserResponseDTO updateUser(Map<String, Object> updates, String id) {
         
         User result = getUserById(id);
 

@@ -1,4 +1,4 @@
-package wealthwise.backend.domain.user;
+package wealthwise.backend.domain;
 
 public enum UserRole {
     ADMIN("admin"),

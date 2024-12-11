@@ -1,10 +1,8 @@
-package wealthwise.backend.domain.user;
+package wealthwise.backend.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-// import wealthwise.backend.domain.Carteira;
-// import wealthwise.backend.domain.Notificacao;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,10 +11,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 // import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.CascadeType;
 // import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
@@ -54,9 +56,9 @@ public class User implements UserDetails {
     private String risk_profile;
     private UserRole role;
 
-    // @OneToMany(cascade = CascadeType.REMOVE)
-    // @JsonManagedReference
-    // private List<Carteira> carteiras;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Wallet> carteiras;
 
     // @OneToMany(cascade = CascadeType.REMOVE)
     // @JsonManagedReference

@@ -1,7 +1,7 @@
 package wealthwise.backend.exceptions;
 
 public class ResourceNotFoundException extends RuntimeException {
-    public ResourceNotFoundException(String resourceType, String message) {
+    public ResourceNotFoundException(String message) {
         super(message);
     }
 }

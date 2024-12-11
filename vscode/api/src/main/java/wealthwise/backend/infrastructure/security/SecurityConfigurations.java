@@ -28,10 +28,17 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+
                         .requestMatchers(HttpMethod.GET, "/users").permitAll()
                         .requestMatchers(HttpMethod.GET, "/users/{id}").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/users/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/users/{id}").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/wallets").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/wallets/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/wallets/{id}").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/wallets/{id}").permitAll()
+
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
                         .anyRequest().authenticated()
