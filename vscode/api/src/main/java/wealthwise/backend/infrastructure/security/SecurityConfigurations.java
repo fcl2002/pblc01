@@ -45,6 +45,10 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.DELETE, "/incomes/**").permitAll()
 
                         .requestMatchers(HttpMethod.POST, "/quotes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/quotes/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/quotes/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/quotes/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/incomes/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/incomes/**").permitAll()
 
