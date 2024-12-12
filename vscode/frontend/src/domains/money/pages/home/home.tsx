@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     // Fetch wallets from the API on component mount
     async function fetchWallets() {
-      const url = import.meta.env.VITE_API_GET_WALLETS;
+      const url = import.meta.env.VITE_API_LIST_MONEYS;
       const response = await fetch(url, {
         method: "GET",
         credentials: "include",
@@ -55,7 +55,7 @@ export default function Home() {
     const confirmDelete = window.confirm("Are you sure you want to delete this wallet?");
     if (!confirmDelete) return;
 
-    const url = import.meta.env.VITE_API_DELETE_WALLET;
+    const url = import.meta.env.VITE_API_DELETE_MONEYS;
     const response = await fetch(`${url}/${walletId}`, {
       method: "DELETE",
       credentials: "include",
