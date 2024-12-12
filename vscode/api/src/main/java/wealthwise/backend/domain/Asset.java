@@ -1,5 +1,7 @@
 package wealthwise.backend.domain;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -57,9 +59,9 @@ public abstract class Asset {
     @JsonBackReference
     private Wallet wallet;
 
-    // @OneToMany(cascade = CascadeType.REMOVE)
-    // @JsonManagedReference
-    // private List<Cotacao> cotacoes;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Quote> quotes;
 
     public Asset(String name, Double invested_value, Integer number_of_quotas, Double current_value, AssetRole role) {
         this.name = name;

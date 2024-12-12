@@ -36,7 +36,7 @@ import jakarta.validation.constraints.Size;
 @NoArgsConstructor
 @AllArgsConstructor
 @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "usuarios")
+@Table(name = "users")
 
 public class User implements UserDetails {
     

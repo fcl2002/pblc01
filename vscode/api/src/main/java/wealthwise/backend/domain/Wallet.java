@@ -23,7 +23,7 @@ import jakarta.persistence.GenerationType;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "carteiras")
+@Table(name = "wallets")
 
 public class Wallet {
 

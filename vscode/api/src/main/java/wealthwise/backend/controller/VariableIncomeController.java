@@ -73,6 +73,6 @@ public class VariableIncomeController {
     public ResponseEntity<String> deleteVariable(@PathVariable String id) {
         
         service.deleteVariable(id);
-        return ResponseEntity.ok("Ativo Variavel deleted (id: " + id + ")");
+        return ResponseEntity.ok("Variable Income deleted with id '" + id + "'");
     }
 }
