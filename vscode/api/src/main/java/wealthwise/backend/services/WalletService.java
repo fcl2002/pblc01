@@ -82,7 +82,7 @@ public class WalletService {
         User user = userService.getUserById(getWalletById(id).getUser().getId());
 
         if(Objects.isNull(user))
-            throw new ResourceNotFoundException("Wallet was not found.");
+            throw new ResourceNotFoundException("User was not found.");
         
         List<Wallet> carteiras = user.getCarteiras();
         for(Iterator<Wallet> it = carteiras.iterator(); it.hasNext();) {

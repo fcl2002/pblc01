@@ -63,7 +63,7 @@ public class WalletController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCarteira(@PathVariable String id) {
+    public ResponseEntity<String> deleteWallet(@PathVariable String id) {
         
         walletService.deleteWallet(id);
         return ResponseEntity.ok("Wallet deleted with id '" + id + "'");

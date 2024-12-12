@@ -1,9 +1,9 @@
 package wealthwise.backend.domain;
 
-// import java.util.List;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-// import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-// import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.persistence.CascadeType;
@@ -41,7 +41,7 @@ public class Wallet {
     @ManyToOne(cascade = CascadeType.REFRESH)
     private User user;
     
-    // @OneToMany(cascade = CascadeType.REMOVE)
-    // @JsonManagedReference
-    // private List<Ativo> ativos;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Asset> assets;
 }
