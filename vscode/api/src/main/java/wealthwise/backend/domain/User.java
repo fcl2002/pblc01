@@ -60,9 +60,9 @@ public class User implements UserDetails {
     @JsonManagedReference
     private List<Wallet> carteiras;
 
-    // @OneToMany(cascade = CascadeType.REMOVE)
-    // @JsonManagedReference
-    // private List<Notificacao> notificacoes;
+    @OneToMany(cascade = CascadeType.REMOVE)
+    @JsonManagedReference
+    private List<Notification> notifications;
 
     public User(String email, String username, String password, String risk_profile, UserRole role) {
         this.email = email;

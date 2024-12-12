@@ -112,7 +112,7 @@ public class VariableIncomeService {
         Wallet wallet = service.getWalletById(getVariableById(id).getWallet().getId());
         
         if(Objects.isNull(wallet))
-            throw new ResourceNotFoundException("Wallet was not found.");
+            throw new ResourceNotFoundException("Wallet not found.");
     
         List<Asset> ativos = wallet.getAssets();
         for(Iterator<Asset> it = ativos.iterator(); it.hasNext();) {

@@ -38,6 +38,15 @@ public class SecurityConfigurations {
                         .requestMatchers(HttpMethod.GET, "/wallets/**").permitAll()
                         .requestMatchers(HttpMethod.PATCH, "/wallets/{id}").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/wallets/{id}").permitAll()
+                        
+                        .requestMatchers(HttpMethod.POST, "/incomes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/incomes/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/incomes/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/incomes/**").permitAll()
+
+                        .requestMatchers(HttpMethod.POST, "/quotes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/incomes/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/incomes/**").permitAll()
 
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         // .requestMatchers(HttpMethod.GET, "/users").hasRole("ADMIN")
