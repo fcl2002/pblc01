@@ -1,4 +1,4 @@
-package wealthwise.backend.infrastructure.security;
+package wealthwise.backend.infra.security;
 
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.OpenAPI;

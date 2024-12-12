@@ -1,4 +1,4 @@
-package wealthwise.backend.infrastructure.security;
+package wealthwise.backend.infra.security;
 
 import java.io.IOException;
 

@@ -1,4 +1,4 @@
-package wealthwise.backend.infrastructure.security;
+package wealthwise.backend.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,4 +1,4 @@
-package wealthwise.backend.infrastructure.handler;
+package wealthwise.backend.infra.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

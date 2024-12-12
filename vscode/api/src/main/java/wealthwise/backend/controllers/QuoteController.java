@@ -1,4 +1,4 @@
-package wealthwise.backend.controller;
+package wealthwise.backend.controllers;
 
 import java.util.List;
 

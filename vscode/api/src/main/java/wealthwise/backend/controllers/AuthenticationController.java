@@ -1,10 +1,10 @@
-package wealthwise.backend.controller;
+package wealthwise.backend.controllers;
 
 import wealthwise.backend.domain.User;
 import wealthwise.backend.dtos.user.AuthenticationDTO;
 import wealthwise.backend.dtos.user.LoginResponseDTO;
 import wealthwise.backend.dtos.user.RegisterDTO;
-import wealthwise.backend.infrastructure.security.TokenService;
+import wealthwise.backend.infra.security.TokenService;
 import wealthwise.backend.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
