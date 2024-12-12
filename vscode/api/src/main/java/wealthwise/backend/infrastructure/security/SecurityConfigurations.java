@@ -50,6 +50,7 @@ public class SecurityConfigurations {
 
                         .requestMatchers(HttpMethod.POST, "/notifications/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/notifications/**").permitAll()
+                        .requestMatchers(HttpMethod.PATCH, "/notifications/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/notifications/**").permitAll()
 
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
