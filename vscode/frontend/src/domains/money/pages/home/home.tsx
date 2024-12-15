@@ -16,6 +16,10 @@ export default function Home() {
   const [wallets, setWallets] = useState<Wallet[]>([]);
   const [filteredWallets, setFilteredWallets] = useState<Wallet[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [token] = useState("");
+  const [userId] = useState("");
+  const [username] = useState("");
+  const [email] = useState("");
 
   useEffect(() => {
     // Fetch wallets from the API on component mount

@@ -35,10 +35,14 @@ public class AuthenticationController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticationDTO data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.username(), data.password());
+        System.out.println(data.username());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
         var token = tokenService.generateToken((User) auth.getPrincipal());
+        // String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        // User user = repository.findByPassword(encryptedPassword).get(0);
         
+        // return ResponseEntity.ok(new LoginResponseDTO(user.getId(), data.username(), user.getEmail(), token));
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 

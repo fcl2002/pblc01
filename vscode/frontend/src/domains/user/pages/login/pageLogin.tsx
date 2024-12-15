@@ -8,6 +8,10 @@ import image from "../../../../assets/ImageLogin.png";
 
 export default function Login() {
   const [error, setError] = useState("");
+  // const [token, setToken] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [username, setUsername] = useState("");
+  // const [email, setEmail] = useState("");
   const signIn = useSignIn();
   const navigate = useNavigate();
 
@@ -27,6 +31,12 @@ export default function Login() {
       });
 
       const parseResp = await response.json();
+      console.log("Response: ", parseResp);
+
+      // setUserId (parseResp.data.id);
+      // setUsername(parseResp.data.username);
+      // setEmail(parseResp.data.email);
+      // setToken(parseResp.token);
 
       const sign = signIn({
         auth: {
@@ -35,9 +45,6 @@ export default function Login() {
           
         },
         userState: {
-          userId: parseResp.data.id,
-          username: parseResp.data.username,
-          email: parseResp.data.email,
           token: parseResp.token,
         },
         refresh: parseResp.token,
@@ -56,7 +63,7 @@ export default function Login() {
 
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     onSubmit,
@@ -72,13 +79,13 @@ export default function Login() {
           <h1>Welcome Back!</h1>
           <p>Enter your credentials to access your account</p>
           <Form onSubmit={formik.handleSubmit}>
-            <label htmlFor="email">Email address:</label>
+            <label htmlFor="username">Username</label>
             <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formik.values.email}
+              id="username"
+              type="text"
+              name="username"
+              placeholder="Enter your username"
+              value={formik.values.username}
               onChange={formik.handleChange}
               />
             <label htmlFor="password">Password:</label>

@@ -14,11 +14,11 @@ function route() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<AuthOutlet fallbackPath="/" />}>
-          <Route element={<Home />}>
+          <Route path="home" element={<Home />}>
             <Route path="wallet" element={<Wallet />} />
             <Route path="settings" element={<Settings />} />
           </Route>
-        </Route>
+        </Route>  
       </Routes>
     </Router>
   );
